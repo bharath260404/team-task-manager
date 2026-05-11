@@ -11,7 +11,10 @@ dotenv.config();
 const app = express();
 export const prisma = new PrismaClient();
 
-app.use(cors());
+app.use(cors({
+  origin: "*", 
+  credentials: true
+}));
 app.use(express.json());
 
 // Routes
@@ -28,5 +31,5 @@ app.patch('/api/tasks/:id', authenticate, updateTaskStatus);
 
 app.get('/', (req, res) => res.send('🚀 API is Live'));
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
